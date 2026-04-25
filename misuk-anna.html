@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>김미숙 | Announcer · MC</title>
+  <meta name="description" content="아나운서 · 행사 MC 김미숙 포트폴리오" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --bg-soft: #141422;
+      --cream: #f5f0e8;
+      --cream-dim: rgba(245, 240, 232, 0.72);
+      --gold: #c9a96e;
+      --gold-line: rgba(201, 169, 110, 0.45);
+      --header-h: 4.25rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    body {
+      font-family: "Noto Sans KR", system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--cream-dim);
+      background: var(--bg);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-serif {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      background: transparent;
+      transition: background 0.45s ease, box-shadow 0.45s ease, backdrop-filter 0.45s ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(13, 13, 26, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--gold-line);
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      z-index: 1002;
+    }
+
+    .burger {
+      width: 2.75rem;
+      height: 2.75rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      z-index: 1002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .burger-lines {
+      width: 1.35rem;
+      height: 14px;
+      position: relative;
+    }
+
+    .burger-lines span {
+      display: block;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--gold);
+      border-radius: 1px;
+      transition: transform 0.35s ease, top 0.35s ease, opacity 0.25s ease;
+    }
+
+    .burger-lines span:nth-child(1) { top: 0; }
+    .burger-lines span:nth-child(2) { top: 6px; }
+    .burger-lines span:nth-child(3) { top: 12px; }
+
+    .burger[aria-expanded="true"] .burger-lines span:nth-child(1) {
+      top: 6px;
+      transform: rotate(45deg);
+    }
+    .burger[aria-expanded="true"] .burger-lines span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger[aria-expanded="true"] .burger-lines span:nth-child(3) {
+      top: 6px;
+      transform: rotate(-45deg);
+    }
+
+    /* ── Overlay nav ── */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .nav-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-overlay nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1.25rem, 4vh, 2rem);
+    }
+
+    .nav-overlay a {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.75rem, 5vw, 2.75rem);
+      font-weight: 500;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: color 0.3s ease, opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .nav-overlay.is-open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nav-overlay.is-open a:nth-child(1) { transition-delay: 0.05s; }
+    .nav-overlay.is-open a:nth-child(2) { transition-delay: 0.1s; }
+    .nav-overlay.is-open a:nth-child(3) { transition-delay: 0.15s; }
+    .nav-overlay.is-open a:nth-child(4) { transition-delay: 0.2s; }
+    .nav-overlay.is-open a:nth-child(5) { transition-delay: 0.25s; }
+    .nav-overlay.is-open a:nth-child(6) { transition-delay: 0.3s; }
+    .nav-overlay.is-open a:nth-child(7) { transition-delay: 0.35s; }
+
+    .nav-overlay a:hover {
+      color: var(--gold);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: minmax(0, 1fr);
+      padding-top: var(--header-h);
+    }
+
+    .hero-visual {
+      position: relative;
+      grid-column: 1;
+      grid-row: 1;
+      min-height: calc(100vh - var(--header-h));
+      min-height: calc(100dvh - var(--header-h));
+      background: #080810;
+    }
+
+    /* 무릎 바로 아래에서 컷 (종아리·의자 하단 제외) */
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 56% 18%;
+      display: block;
+      clip-path: inset(0 0 26% 0);
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 50%, var(--bg) 100%);
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.5rem) clamp(4rem, 10vh, 6rem);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-en {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: var(--cream-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-name {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3.5rem, 9vw, 6.25rem);
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      text-shadow: 0 0 48px rgba(201, 169, 110, 0.22);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tag {
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      color: var(--cream-dim);
+    }
+
+    .scroll-hint {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      align-self: end;
+      justify-self: center;
+      position: relative;
+      z-index: 6;
+      margin-bottom: clamp(1.25rem, 3vh, 2rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--gold);
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .scroll-hint svg {
+      width: 1.35rem;
+      height: 1.35rem;
+      animation: bounce-arrow 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce-arrow {
+      0%, 100% { transform: translateY(0); opacity: 0.9; }
+      50% { transform: translateY(8px); opacity: 0.5; }
+    }
+
+    /* ── Sections common ── */
+    .section {
+      padding: clamp(4.5rem, 12vw, 7rem) clamp(1.5rem, 5vw, 3rem);
+      border-top: 1px solid var(--gold-line);
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+      font-weight: 500;
+      color: var(--cream);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: clamp(2rem, 5vw, 3rem);
+    }
+
+    .section-title--ko {
+      text-transform: none;
+      letter-spacing: 0.06em;
+    }
+
+    .awards-list {
+      max-width: 42rem;
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.88fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+    }
+
+    .about-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .about-list li {
+      position: relative;
+      padding-left: 1.1rem;
+      font-size: 0.95rem;
+      color: var(--cream-dim);
+      line-height: 1.65;
+    }
+
+    .about-list li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      top: 0.52em;
+      font-size: 0.38rem;
+      line-height: 1;
+      color: var(--gold);
+      letter-spacing: 0;
+    }
+
+    .about-photo {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border: 1px solid var(--gold-line);
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    /* ── Career timeline ── */
+    .timeline {
+      position: relative;
+      max-width: 720px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: calc(6.5rem + 0.75rem);
+      top: 0.25rem;
+      bottom: 0.25rem;
+      width: 1px;
+      background: var(--gold-line);
+    }
+
+    .tl-row {
+      display: grid;
+      grid-template-columns: 6.5rem 1fr;
+      gap: 1.5rem;
+      padding: 1.15rem 0;
+      align-items: start;
+    }
+
+    .tl-year {
+      font-family: "Playfair Display", serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--gold);
+      text-align: right;
+      padding-right: 0.25rem;
+      line-height: 1.5;
+    }
+
+    .tl-body {
+      font-size: 0.94rem;
+      color: var(--cream);
+      font-weight: 300;
+      padding-left: 0.5rem;
+    }
+
+    /* ── Work cards ── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1rem, 2vw, 1.35rem);
+    }
+
+    .work-card {
+      background: var(--bg-soft);
+      border: 1px solid rgba(201, 169, 110, 0.18);
+      padding: 1.15rem 1.25rem 1.35rem;
+      min-height: 6.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      font-size: 0.9rem;
+      color: var(--cream-dim);
+      line-height: 1.55;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .work-card-tag {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      margin-bottom: 0.55rem;
+    }
+
+    .work-card-body {
+      flex: 1;
+      margin: 0;
+    }
+
+    .work-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    /* ── Gallery ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.65rem, 1.5vw, 1rem);
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #12121c;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(201, 169, 110, 0);
+      transition: background 0.4s ease;
+      pointer-events: none;
+    }
+
+    .gallery-item:hover::after {
+      background: rgba(201, 169, 110, 0.22);
+    }
+
+    .gallery-zoom {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .gallery-item:hover .gallery-zoom {
+      opacity: 1;
+    }
+
+    .gallery-zoom svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      stroke: var(--cream);
+      fill: none;
+      stroke-width: 1.35;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, #0a0a12 100%);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.15rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .contact-list a,
+    .contact-list span {
+      font-size: 1rem;
+      color: var(--cream-dim);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.25s ease;
+    }
+
+    .contact-list a:hover {
+      color: var(--gold);
+    }
+
+    .btn-inquiry {
+      display: inline-block;
+      font-family: "Playfair Display", serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 1rem 2.75rem;
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-inquiry:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 2rem 1rem 2.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 110, 0.4);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+      }
+
+      .hero-visual {
+        grid-column: 1;
+        grid-row: 1;
+        min-height: clamp(42vh, 50vw, 52vh);
+        max-height: 55vh;
+      }
+
+      .hero-copy {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .scroll-hint {
+        grid-column: 1;
+        grid-row: 1;
+        align-self: end;
+        margin-bottom: 0.75rem;
+      }
+
+      .hero-visual img {
+        object-position: 50% 14%;
+        clip-path: inset(0 0 30% 0);
+      }
+
+      .hero-visual::after {
+        background: linear-gradient(180deg, transparent 55%, var(--bg) 100%);
+      }
+
+      .hero-copy {
+        text-align: center;
+        align-items: center;
+        padding-bottom: 4.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-photo {
+        max-width: 420px;
+        margin: 0 auto;
+      }
+
+      .work-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline::before {
+        left: calc(5rem + 0.5rem);
+      }
+
+      .tl-row {
+        grid-template-columns: 5rem 1fr;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .work-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tl-year {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <a class="logo" href="#home">김미숙</a>
+    <button
+      type="button"
+      class="burger"
+      id="burger"
+      aria-label="메뉴 열기"
+      aria-expanded="false"
+      aria-controls="nav-overlay"
+    >
+      <span class="burger-lines">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </header>
+
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#awards">Awards</a>
+      <a href="#career">Career</a>
+      <a href="#work">Work</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <section class="hero" id="home">
+    <div class="hero-visual">
+      <img src="profile-main.png" width="1200" height="1800" alt="김미숙 프로필" loading="eager" decoding="async" />
+    </div>
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Announcer · MC</p>
+      <p class="hero-en">KIM MI-SUK</p>
+      <h1 class="hero-name">김미숙</h1>
+      <p class="hero-tag">아나운서 · MC</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+  </section>
+
+  <section class="section" id="about" data-reveal>
+    <div class="section-inner">
+      <h2 class="section-title">About</h2>
+      <div class="about-grid">
+        <div>
+          <p style="color: var(--cream); font-size: 0.95rem; margin-bottom: 1.5rem; font-weight: 400;">현재 활동</p>
+          <ul class="about-list">
+            <li>TBN 충북교통방송 「출발 충북대행진」 라디오 MC</li>
+            <li>행사 MC / 사회자 / 아나운서</li>
+            <li>쇼호스트 / 라이브커머스 진행 &amp; 교육</li>
+            <li>충북시청자미디어센터 체험교육 강사</li>
+            <li>스피치 강의 / 보이스 디자인</li>
+          </ul>
+        </div>
+        <figure class="about-photo">
+          <img src="profile-3.jpg" width="900" height="1200" alt="김미숙" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="awards" data-reveal>
+    <div class="section-inner">
+      <h2 class="section-title section-title--ko">수상내역</h2>
+      <ul class="elegant-list awards-list">
+        <li>제4회 월드슈퍼퀸 한복모델 「미」 수상</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="career" data-reveal>
+    <div class="section-inner">
+      <h2 class="section-title">Career</h2>
+      <p style="color: var(--gold); font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem;">방송 경력</p>
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-year">2020 — 2025</div>
+          <div class="tl-body">TBN 충북교통방송 「출발 충북대행진」 MC</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2015 — 2020</div>
+          <div class="tl-body">TBN 대전교통방송 「스튜디오 1029」 MC</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2011 — 2013</div>
+          <div class="tl-body">청주 KBS 「음식기행 삼도삼미」 MC</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2008 — 2011</div>
+          <div class="tl-body">YTN FM 뉴스 앵커</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2008 — 2010</div>
+          <div class="tl-body">청주 MBC MC</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2007 — 2008</div>
+          <div class="tl-body">G1방송 DJ</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2003 — 2004</div>
+          <div class="tl-body">KBS i 아나운서</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work" data-reveal>
+    <div class="section-inner">
+      <h2 class="section-title">Work</h2>
+      <p style="color: var(--cream-dim); font-size: 0.92rem; margin-bottom: 2rem;">최근 주요 행사</p>
+      <div class="work-grid">
+        <div class="work-card">
+          <span class="work-card-tag">교육</span>
+          <p class="work-card-body">2026 사회복지직 공무원 역량강화 교육</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">축제</span>
+          <p class="work-card-body">제25회 리산벚꽃축제 행사진행</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">행사</span>
+          <p class="work-card-body">SK SUPEX Center 행사</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">행사</span>
+          <p class="work-card-body">논산문화예술 두 거장의 앙상블</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">기념식</span>
+          <p class="work-card-body">청주랜드 기후변화체험관 재개관식</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">행사</span>
+          <p class="work-card-body">충북청년 정책제안 대회 결선</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">행사</span>
+          <p class="work-card-body">충남도 태권도인의 밤</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">행사</span>
+          <p class="work-card-body">풀뿌리자치대상 자랑스런 충청인상</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">기념식</span>
+          <p class="work-card-body">제79주년 광복절 경축행사 (독립기념관)</p>
+        </div>
+        <div class="work-card">
+          <span class="work-card-tag">기념식</span>
+          <p class="work-card-body">제105주년 3.1절 기념식 (독립기념관)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery" data-reveal>
+    <div class="section-inner">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="profile-main.png" alt="프로필" width="800" height="1200" loading="lazy" decoding="async" />
+          <div class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35M11 8v6M8 11h6" /></svg>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="profile-2.jpg" alt="포트레이트" width="800" height="1200" loading="lazy" decoding="async" />
+          <div class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35M11 8v6M8 11h6" /></svg>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="profile-3.jpg" alt="포트레이트" width="800" height="1200" loading="lazy" decoding="async" />
+          <div class="gallery-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35M11 8v6M8 11h6" /></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section" id="contact" data-reveal>
+    <div class="section-inner">
+      <h2 class="section-title">Contact</h2>
+      <ul class="contact-list">
+        <li>
+          <span>📞 <a href="tel:01047801771">010-4780-1771</a></span>
+        </li>
+        <li>
+          <span>📧 <a href="mailto:kmsbb@hanmail.net">kmsbb@hanmail.net</a></span>
+        </li>
+        <li>
+          <span>📸 <a href="https://www.instagram.com/misuk_anna/" target="_blank" rel="noopener noreferrer">@misuk_anna</a></span>
+        </li>
+      </ul>
+      <a class="btn-inquiry" href="mailto:kmsbb@hanmail.net?subject=%EB%AC%B8%EC%9D%98%20-%20%EA%B9%80%EB%AF%B8%EC%88%99%20%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4">문의하기</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">Kim Misuk · Announcer · MC</footer>
+
+  <script>
+    (function () {
+      var header = document.getElementById("site-header");
+      var burger = document.getElementById("burger");
+      var overlay = document.getElementById("nav-overlay");
+      var navLinks = overlay.querySelectorAll("a");
+
+      function setScrolled() {
+        if (window.scrollY > 40) {
+          header.classList.add("is-scrolled");
+        } else {
+          header.classList.remove("is-scrolled");
+        }
+      }
+
+      window.addEventListener("scroll", setScrolled, { passive: true });
+      setScrolled();
+
+      function closeMenu() {
+        burger.setAttribute("aria-expanded", "false");
+        burger.setAttribute("aria-label", "메뉴 열기");
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("menu-open");
+      }
+
+      function openMenu() {
+        burger.setAttribute("aria-expanded", "true");
+        burger.setAttribute("aria-label", "메뉴 닫기");
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.classList.add("menu-open");
+      }
+
+      burger.addEventListener("click", function () {
+        if (overlay.classList.contains("is-open")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          closeMenu();
+        });
+      });
+
+      overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeMenu();
+        }
+      });
+
+      var revealables = document.querySelectorAll("[data-reveal]");
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+        );
+        revealables.forEach(function (el) {
+          io.observe(el);
+        });
+      } else {
+        revealables.forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
