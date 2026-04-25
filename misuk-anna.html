@@ -1304,6 +1304,8 @@
     </div>
   </section>
 
+  <!-- 문의 완료 모달 -->
+  <div id="thank-modal" style="display:none;opacity:0;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;transition:opacity 0.3s ease;"><div style="background:#0D0D1A;border:1px solid #C9A96E;padding:3rem 2.5rem;max-width:420px;width:90%;text-align:center;border-radius:4px;"><p style="color:#C9A96E;font-size:1.8rem;font-family:Playfair Display,serif;margin-bottom:1rem;">감사합니다</p><p style="color:#F5F0E8;font-size:1rem;line-height:1.7;margin-bottom:2rem;">문의가 접수되었습니다.<br>빠른 시일 내에 연락드리겠습니다.</p><button onclick="var m=document.getElementById('thank-modal');m.style.opacity='0';setTimeout(function(){m.style.display='none'},300);" style="background:transparent;border:1px solid #C9A96E;color:#C9A96E;padding:0.75rem 2rem;cursor:pointer;font-size:0.9rem;letter-spacing:0.1em;">닫기</button></div></div>
   <div class="toast" id="inquiry-toast" role="status" aria-live="polite" aria-atomic="true">문의가 접수되었습니다</div>
 
   <footer class="site-footer">
@@ -1510,7 +1512,12 @@
             headers: { "Accept": "application/json" }
           }).then(function(res) {
             if (res.ok) {
-              form.innerHTML = "<div style='text-align:center;padding:3rem 0;'><p style='color:#C9A96E;font-size:1.5rem;font-family:Playfair Display,serif;margin-bottom:1rem;'>감사합니다 🙏</p><p style='color:#F5F0E8;'>문의가 접수되었습니다.<br>빠른 시일 내에 연락드리겠습니다.</p></div>";
+              var modal = document.getElementById("thank-modal");
+              if (modal) {
+                modal.style.display = "flex";
+                form.reset();
+                setTimeout(function() { modal.style.opacity = "1"; }, 10);
+              }
             } else {
               btn.textContent = "문의하기";
               btn.disabled = false;
